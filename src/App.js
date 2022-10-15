@@ -1,6 +1,7 @@
 import React from "react";
 import Personal from "./components/Personal";
 import Experience from "./components/Experience";
+import Education from "./components/Education";
 
 class App extends React.Component {
   render() {
@@ -9,6 +10,7 @@ class App extends React.Component {
         <form>
           <Personal />
           <Experience />
+          <Education />
         </form>
       </div>
     );
