@@ -23,11 +23,11 @@ class Experience extends React.Component {
   }
 
   addTask() {
-    const arr = this.state.experiences;
     for (let each in this.state.currentEx) {
       if (this.state.currentEx[each] === "") return;
     }
-    arr.push(this.state.currentEx);
+
+    const arr = [].concat(this.state.experiences, this.state.currentEx);
 
     this.setState({
       experiences: arr,
