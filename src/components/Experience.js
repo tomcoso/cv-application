@@ -1,5 +1,6 @@
 import React from "react";
 import uniqid from "uniqid";
+import ExpItem from "./ExpItem";
 
 class Experience extends React.Component {
   constructor(props) {
@@ -23,6 +24,9 @@ class Experience extends React.Component {
 
   addTask() {
     const arr = this.state.experiences;
+    for (let each in this.state.currentEx) {
+      if (this.state.currentEx[each] === "") return;
+    }
     arr.push(this.state.currentEx);
 
     this.setState({
@@ -39,20 +43,21 @@ class Experience extends React.Component {
   }
 
   updateCurrentEx(e) {
-    for (let each in this.state.currentEx) {
+    let newCurrent;
+    for (let each of Object.keys(this.state.currentEx)) {
       if (e.target.id === each) {
-        this.state.currentEx[each] = e.target.value;
+        const change = {};
+        change[each] = e.target.value;
+        const stateCopy = this.state.currentEx;
+        newCurrent = Object.assign(stateCopy, change);
       }
     }
-    const newCurrent = this.state.currentEx;
     this.setState({
-      experiences: this.state.experiences,
       currentEx: newCurrent,
     });
   }
 
   render() {
-    console.log(this.state.experiences);
     const currentEx = this.state.currentEx;
     return (
       <fieldset id="work-experience">
@@ -108,15 +113,7 @@ class Experience extends React.Component {
         </div>
         <ul id="all-experiences">
           {this.state.experiences.map((item) => (
-            <li className="experience" key={item.id}>
-              <span>
-                {item.position} at {item.company}.
-              </span>
-              <span>
-                From {item.start.slice(0, 7)} To {item.finish.slice(0, 7)}.
-              </span>
-              <p>{item.tasks}.</p>
-            </li>
+            <ExpItem item={item} key={item.id} />
           ))}
         </ul>
       </fieldset>
