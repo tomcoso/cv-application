@@ -1,6 +1,7 @@
 import React from "react";
 import uniqid from "uniqid";
 import ExpItem from "./ExpItem";
+import "./Experience.scss";
 
 class Experience extends React.Component {
   constructor(props) {

@@ -52,7 +52,7 @@ class EdItem extends React.Component {
         )}
 
         {this.props.mode === "edit" ? (
-          <div>
+          <span>
             <input
               id="start"
               type="date"
@@ -61,8 +61,8 @@ class EdItem extends React.Component {
                 this.props.edit(e, item);
                 this.changeState(e);
               }}
-            />
-            <span>To</span>
+            />{" "}
+            To{" "}
             <input
               id="finish"
               type="date"
@@ -72,7 +72,7 @@ class EdItem extends React.Component {
                 this.changeState(e);
               }}
             />
-          </div>
+          </span>
         ) : (
           <span>
             {item.start.slice(0, 4)} To {item.finish.slice(0, 4)}.

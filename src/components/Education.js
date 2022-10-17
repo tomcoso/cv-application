@@ -1,6 +1,7 @@
 import React from "react";
 import EdItem from "./EdItem";
 import uniqid from "uniqid";
+import "./Education.scss";
 
 class Education extends React.Component {
   constructor(props) {

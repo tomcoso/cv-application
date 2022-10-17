@@ -1,0 +1,88 @@
+#personal-info {
+  padding: 20px;
+
+  display: grid;
+  grid: repeat(4, 1fr) / 1fr min-content;
+  gap: 10px;
+
+  border: none;
+  box-shadow: inset 0px 5px 5px -5px #000;
+
+  $paper: #FCFED8;
+  $bg: #E4BB97;
+
+  legend {
+    font-size: 1.3rem;
+    background-color: $paper;
+    padding: 0px 2px;
+  }
+
+  input {
+    width: auto;
+  }
+
+  #first-name {
+    grid-row: 1/2;
+    grid-column: 1/2;
+    padding-right: 1rem;
+
+    font-size: 1.4rem;
+
+    input {
+      font-size: 1.2rem;
+    }
+  }
+
+  #last-name {
+    grid-row: 2/3;
+    grid-column: 1/2;
+    padding-right: 1rem;
+
+    font-size: 1.4rem;
+
+    input {
+      font-size: 1.2rem;
+    }
+  }
+
+  #dob {
+    grid-row: 1/2;
+    grid-column: 2/3;
+
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 5px;
+
+    font-size: 1.1rem;
+  }
+
+  #address {
+    grid-row: 2/3;
+    grid-column: 2/3;
+
+    font-size: 1.1rem;
+
+    input {
+      width: 25ch;
+    }
+  }
+
+  #email {
+    grid-row: 3/4;
+    grid-column: 2/3;
+
+    font-size: 1.1rem;
+
+    input {
+      width: 25ch;
+    }
+  }
+
+  #phone-number {
+    grid-row: 4/5;
+    grid-column: 2/3;
+
+    font-size: 1.1rem;
+  }
+}

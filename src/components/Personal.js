@@ -1,4 +1,5 @@
 import React from "react";
+import "./Personal.scss";
 
 class Personal extends React.Component {
   constructor(props) {

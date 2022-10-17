@@ -88,9 +88,8 @@ class ExpItem extends React.Component {
               id="tasks"
               cols="30"
               rows="3"
-            >
-              {item.tasks}
-            </textarea>
+              value={item.tasks}
+            ></textarea>
           </p>
         ) : (
           <p>{item.tasks}.</p>
