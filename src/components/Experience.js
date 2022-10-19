@@ -63,7 +63,7 @@ class Experience extends React.Component {
     const experiences = this.state.experiences;
     for (let each of experiences) {
       if (item.id === each.id) {
-        experiences[each] = e.target.value;
+        each[e.target.id] = e.target.value;
       }
     }
     this.setState({ experiences });

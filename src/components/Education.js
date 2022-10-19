@@ -63,10 +63,10 @@ class Education extends React.Component {
     const studies = this.state.studies;
     for (let each of studies) {
       if (item.id === each.id) {
-        studies[each] = e.target.value;
+        each[e.target.id] = e.target.value;
       }
     }
-    this.setState({ studies: studies });
+    this.setState({ studies });
   }
 
   render() {

@@ -1,24 +1,8 @@
 import React from "react";
 
 class EdItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { item: this.props.item };
-  }
-
-  changeState(e) {
-    let item = this.state.item;
-    for (let each in item) {
-      if (e.target.id === each) {
-        item[each] = e.target.value;
-      }
-    }
-    this.setState({ item: item });
-  }
-
   render() {
-    const item = this.state.item;
+    const item = this.props.item;
     return (
       <li className="education" key={item.id}>
         {this.props.mode === "edit" ? (
@@ -29,7 +13,6 @@ class EdItem extends React.Component {
             value={item.degree}
             onChange={(e) => {
               this.props.edit(e, item);
-              this.changeState(e);
             }}
           />
         ) : (
@@ -44,7 +27,6 @@ class EdItem extends React.Component {
             value={item.institution}
             onChange={(e) => {
               this.props.edit(e, item);
-              this.changeState(e);
             }}
           />
         ) : (
@@ -59,7 +41,6 @@ class EdItem extends React.Component {
               value={item.start}
               onChange={(e) => {
                 this.props.edit(e, item);
-                this.changeState(e);
               }}
             />{" "}
             To{" "}
