@@ -1,41 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import Personal from "./components/Personal";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = (props) => {
+  const [mode, setMode] = useState("edit");
 
-    this.state = { mode: "edit" };
+  const changeMode = () => {
+    mode === "edit" ? setMode("submit") : setMode("edit");
+  };
 
-    this.changeMode = this.changeMode.bind(this);
-  }
-
-  changeMode() {
-    this.state.mode === "edit"
-      ? this.setState({ mode: "submit" })
-      : this.setState({ mode: "edit" });
-  }
-
-  // storeData() {
-
-  // }
-
-  render() {
-    return (
-      <div>
-        <form>
-          <Personal mode={this.state.mode} />
-          <Experience mode={this.state.mode} />
-          <Education mode={this.state.mode} />
-          <button type="button" id="change-mode" onClick={this.changeMode}>
-            {this.state.mode === "edit" ? "Submit" : "Edit"}
-          </button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form>
+        <Personal mode={mode} />
+        <Experience mode={mode} />
+        <Education mode={mode} />
+        <button type="button" id="change-mode" onClick={changeMode}>
+          {mode === "edit" ? "Submit" : "Edit"}
+        </button>
+      </form>
+    </div>
+  );
+};
 
 export default App;

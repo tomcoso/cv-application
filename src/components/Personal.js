@@ -1,129 +1,107 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Personal.scss";
 
-class Personal extends React.Component {
-  constructor(props) {
-    super(props);
+const Personal = (props) => {
+  const [stateFirst, setStateFirst] = useState("");
+  const [stateLast, setStateLast] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [stateAddress, setStateAddress] = useState("");
+  const [stateEmail, setStateEmail] = useState("");
+  const [statePhone, setStatePhone] = useState("");
 
-    this.state = {
-      stateFirst: "",
-      stateLast: "",
-      dateOfBirth: "",
-      stateAddress: "",
-      stateEmail: "",
-      statePhone: "",
-    };
+  return (
+    <fieldset id="personal-info">
+      <legend>Personal Information</legend>
 
-    this.update = this.update.bind(this);
-  }
+      <div id="first-name">
+        {props.mode === "edit" ? (
+          <input
+            id="stateFirst"
+            type="text"
+            placeholder="First Name"
+            value={stateFirst}
+            onChange={(e) => setStateFirst(e.target.value)}
+          />
+        ) : (
+          <span>{stateFirst}</span>
+        )}
+      </div>
 
-  update(e) {
-    for (let each in this.state) {
-      if (e.target.id === each) {
-        let st = this.state;
-        let change = {};
-        change[each] = e.target.value;
-        let newSt = Object.assign(st, change);
-        this.setState(newSt);
-      }
-    }
-  }
+      <div id="last-name">
+        {props.mode === "edit" ? (
+          <input
+            id="stateLast"
+            type="text"
+            placeholder="Last Name"
+            value={stateLast}
+            onChange={(e) => setStateLast(e.target.value)}
+          />
+        ) : (
+          <span>{stateLast}</span>
+        )}
+      </div>
 
-  render() {
-    return (
-      <fieldset id="personal-info">
-        <legend>Personal Information</legend>
-
-        <div id="first-name">
-          {this.props.mode === "edit" ? (
+      <div id="dob">
+        {props.mode === "edit" ? (
+          <div>
+            <label htmlFor="date-of-birth">DOB</label>
             <input
-              id="stateFirst"
-              type="text"
-              placeholder="First Name"
-              value={this.state.stateFirst}
-              onChange={this.update}
+              type="date"
+              id="dateOfBirth"
+              min="16"
+              max="100"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
             />
-          ) : (
-            <span>{this.state.stateFirst}</span>
-          )}
-        </div>
+          </div>
+        ) : (
+          <span>{dateOfBirth}</span>
+        )}
+      </div>
 
-        <div id="last-name">
-          {this.props.mode === "edit" ? (
-            <input
-              id="stateLast"
-              type="text"
-              placeholder="Last Name"
-              value={this.state.stateLast}
-              onChange={this.update}
-            />
-          ) : (
-            <span>{this.state.stateLast}</span>
-          )}
-        </div>
+      <div id="address">
+        {props.mode === "edit" ? (
+          <input
+            type="text"
+            placeholder="Home Address"
+            id="stateAddress"
+            value={stateAddress}
+            onChange={(e) => setStateAddress(e.target.value)}
+          />
+        ) : (
+          <span>{stateAddress}</span>
+        )}
+      </div>
 
-        <div id="dob">
-          {this.props.mode === "edit" ? (
-            <div>
-              <label htmlFor="date-of-birth">DOB</label>
-              <input
-                type="date"
-                id="dateOfBirth"
-                min="16"
-                max="100"
-                value={this.state.dateOfBirth}
-                onChange={this.update}
-              />
-            </div>
-          ) : (
-            <span>{this.state.dateOfBirth}</span>
-          )}
-        </div>
+      <div id="email">
+        {props.mode === "edit" ? (
+          <input
+            type="email"
+            placeholder="E-mail"
+            id="stateEmail"
+            value={stateEmail}
+            onChange={(e) => setStateEmail(e.target.value)}
+          />
+        ) : (
+          <span>{stateEmail}</span>
+        )}
+      </div>
 
-        <div id="address">
-          {this.props.mode === "edit" ? (
-            <input
-              type="text"
-              placeholder="Home Address"
-              id="stateAddress"
-              value={this.state.stateAddress}
-              onChange={this.update}
-            />
-          ) : (
-            <span>{this.state.stateAddress}</span>
-          )}
-        </div>
-
-        <div id="email">
-          {this.props.mode === "edit" ? (
-            <input
-              type="email"
-              placeholder="E-mail"
-              id="stateEmail"
-              value={this.state.stateEmail}
-              onChange={this.update}
-            />
-          ) : (
-            <span>{this.state.stateEmail}</span>
-          )}
-        </div>
-
-        <div id="phone-number">
-          {this.props.mode === "edit" ? (
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              id="statePhone"
-              value={this.state.statePhone}
-              onChange={this.update}
-            />
-          ) : (
-            <span>{this.state.statePhone}</span>
-          )}
-        </div>
-      </fieldset>
-    );
-  }
-}
+      <div id="phone-number">
+        {props.mode === "edit" ? (
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            id="statePhone"
+            value={statePhone}
+            onChange={(e) => setStatePhone(e.target.value)}
+          />
+        ) : (
+          <span>{statePhone}</span>
+        )}
+      </div>
+    </fieldset>
+  );
+};
 
 export default Personal;
