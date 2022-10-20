@@ -1,145 +1,110 @@
-import React from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import ExpItem from "./ExpItem";
 import "./Experience.scss";
 
-class Experience extends React.Component {
-  constructor(props) {
-    super(props);
+const Experience = (props) => {
+  const [experiences, setExperiences] = useState([]);
+  const [company, setCompany] = useState("");
+  const [position, setPosition] = useState("");
+  const [start, setStart] = useState("");
+  const [finish, setFinish] = useState("");
+  const [tasks, setTasks] = useState("");
+  const [id, setId] = useState(uniqid());
+  const forceUpdate = useState(1)[1];
 
-    this.state = {
-      experiences: [],
-      currentEx: {
-        company: "",
-        position: "",
-        start: "",
-        finish: "",
-        tasks: "",
-        id: uniqid(),
-      },
-    };
+  const addItem = () => {
+    const newExpArray = experiences;
+    newExpArray.push({ company, position, start, finish, tasks, id });
+    setExperiences(newExpArray);
 
-    this.addTask = this.addTask.bind(this);
-    this.updateCurrentEx = this.updateCurrentEx.bind(this);
-    this.editItem = this.editItem.bind(this);
-  }
+    setCompany("");
+    setPosition("");
+    setStart("");
+    setFinish("");
+    setTasks("");
+    setId(uniqid());
+  };
 
-  addTask() {
-    for (let each in this.state.currentEx) {
-      if (this.state.currentEx[each] === "") return;
-    }
-
-    const arr = [].concat(this.state.experiences, this.state.currentEx);
-
-    this.setState({
-      experiences: arr,
-      currentEx: {
-        company: "",
-        position: "",
-        start: "",
-        finish: "",
-        tasks: "",
-        id: uniqid(),
-      },
-    });
-  }
-
-  updateCurrentEx(e) {
-    let newCurrent;
-    for (let each of Object.keys(this.state.currentEx)) {
-      if (e.target.id === each) {
-        const change = {};
-        change[each] = e.target.value;
-        const stateCopy = this.state.currentEx;
-        newCurrent = Object.assign(stateCopy, change);
-      }
-    }
-    this.setState({
-      currentEx: newCurrent,
-    });
-  }
-
-  editItem(e, item) {
-    const experiences = this.state.experiences;
+  const editItem = (e, item) => {
     for (let each of experiences) {
       if (item.id === each.id) {
         each[e.target.id] = e.target.value;
+        const updateEx = experiences;
+        setExperiences(updateEx);
+        forceUpdate(Math.random());
       }
     }
-    this.setState({ experiences });
-  }
+  };
 
-  render() {
-    const currentEx = this.state.currentEx;
-    return (
-      <fieldset id="work-experience">
-        <legend>Work Experience</legend>
-        {this.props.mode === "edit" ? (
-          <div id="new-experience">
-            <div id="new-name">
-              <label htmlFor="company">Company Name</label>
-              <input
-                type="text"
-                id="company"
-                onChange={this.updateCurrentEx}
-                value={currentEx.company}
-              />
-            </div>
-            <div id="new-title">
-              <label htmlFor="position">Position</label>
-              <input
-                type="text"
-                id="position"
-                onChange={this.updateCurrentEx}
-                value={currentEx.position}
-              />
-            </div>
-            <div id="new-date">
-              <label htmlFor="start">From:</label>
-              <input
-                type="date"
-                id="start"
-                onChange={this.updateCurrentEx}
-                value={currentEx.start}
-              />
-              <label htmlFor="finish">To:</label>
-              <input
-                type="date"
-                id="finish"
-                onChange={this.updateCurrentEx}
-                value={currentEx.finish}
-              />
-            </div>
-            <div id="new-tasks">
-              <label htmlFor="tasks">General Tasks and Responsanilities:</label>
-              <textarea
-                id="tasks"
-                cols="40"
-                rows="6"
-                onChange={this.updateCurrentEx}
-                value={currentEx.tasks}
-              ></textarea>
-            </div>
-            <button type="button" id="new-work-add" onClick={this.addTask}>
-              Add
-            </button>
-          </div>
-        ) : (
-          ""
-        )}
-        <ul id="all-experiences">
-          {this.state.experiences.map((item) => (
-            <ExpItem
-              item={item}
-              key={item.id}
-              edit={this.editItem}
-              mode={this.props.mode}
+  return (
+    <fieldset id="work-experience">
+      <legend>Work Experience</legend>
+      {props.mode === "edit" ? (
+        <div id="new-experience">
+          <div id="new-name">
+            <label htmlFor="company">Company Name</label>
+            <input
+              type="text"
+              id="company"
+              onChange={(e) => setCompany(e.target.value)}
+              value={company}
             />
-          ))}
-        </ul>
-      </fieldset>
-    );
-  }
-}
+          </div>
+          <div id="new-title">
+            <label htmlFor="position">Position</label>
+            <input
+              type="text"
+              id="position"
+              onChange={(e) => setPosition(e.target.value)}
+              value={position}
+            />
+          </div>
+          <div id="new-date">
+            <label htmlFor="start">From:</label>
+            <input
+              type="date"
+              id="start"
+              onChange={(e) => setStart(e.target.value)}
+              value={start}
+            />
+            <label htmlFor="finish">To:</label>
+            <input
+              type="date"
+              id="finish"
+              onChange={(e) => setFinish(e.target.value)}
+              value={finish}
+            />
+          </div>
+          <div id="new-tasks">
+            <label htmlFor="tasks">General Tasks and Responsanilities:</label>
+            <textarea
+              id="tasks"
+              cols="40"
+              rows="6"
+              onChange={(e) => setTasks(e.target.value)}
+              value={tasks}
+            ></textarea>
+          </div>
+          <button type="button" id="new-work-add" onClick={addItem}>
+            Add
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+      <ul id="all-experiences">
+        {experiences.map((item) => (
+          <ExpItem
+            item={item}
+            key={item.id}
+            edit={editItem}
+            mode={props.mode}
+          />
+        ))}
+      </ul>
+    </fieldset>
+  );
+};
 
 export default Experience;
