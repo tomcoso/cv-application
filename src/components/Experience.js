@@ -14,6 +14,8 @@ const Experience = (props) => {
   const forceUpdate = useState(1)[1];
 
   const addItem = () => {
+    if (!(company && position && start && finish && tasks)) return;
+
     const newExpArray = experiences;
     newExpArray.push({ company, position, start, finish, tasks, id });
     setExperiences(newExpArray);
